@@ -337,6 +337,9 @@ var refData = [
 			}
 		}
 		
+		if (minDis > 0.01)
+			return -1; // too far
+		
 		return minIndex;
 	}
 	
