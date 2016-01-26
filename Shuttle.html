@@ -850,7 +850,7 @@ var refDataPM = [
 ,[6.921151485479238,79.96165208682288,"October 13, 2015 12:36:18.970"]];
 
 	var map = null;
-	var refData = ((new Date()).getHours() > 12 ? refDataAM : refDataPM);
+	var refData = ((new Date()).getHours() < 12 ? refDataAM : refDataPM);
 	
 	function start() 
 	{
