@@ -1,0 +1,503 @@
+﻿<html>
+<head>
+   <title>Sinhala Transliterator</title>
+    <meta charset="utf-8" />
+	
+<script>	
+var HAL_KIREEMA = "්";
+var STANDALONE_VOWELS = 18;
+var gz_STDVowels = 
+[
+	"a"
+	, "aa"
+	, "A"
+	, "AA"
+	, "i"
+	, "ee"
+	, "u"
+	, "oo"
+	, "xru"
+	, "xroo"
+	, "e"
+	, "ea"
+	, "ai"
+	, "o"
+	, "oa"
+	, "ou"
+	, "zn"
+	, "zh"
+];
+
+var gwz_UnicodeSTDVowels = 
+[
+	"අ"
+	, "ආ"
+	, "ඇ"
+	, "ඈ"
+	, "ඉ"
+	, "ඊ"
+	, "උ"
+	, "ඌ"
+	, "ඍ"
+	, "ඎ"
+	, "එ"
+	, "ඒ"
+	, "ඓ"
+	, "ඔ"
+	, "ඕ"
+	, "ඖ"
+	, "ං"
+	, "ඃ"
+];
+
+var VOWELS_1 = 6;
+var gz_Vowels_1 = 
+[
+	"a"
+	, "A"
+	, "i"
+	, "u"
+	, "e"
+	, "o"
+];
+
+var gwz_UnicodeVowels_1 = 
+[
+	""
+	, "ැ"
+	, "ි"
+	, "ු"
+	, "ෙ"
+	, "ො"
+];
+
+var VOWELS_2 = 22;
+var gz_Vowels_2 = 
+[
+	"aa"
+	, "AA"
+	, "ee"
+	, "oo"
+	, "ru"
+	, "ea"
+	, "ai"
+	, "oa"
+	, "ou"
+	, "ra"
+	, "rA"
+	, "ri"
+	, "re"
+	, "ro"
+	, "ya"
+	, "yA"
+	, "yi"
+	, "yu"
+	, "ye"
+	, "yo"
+	, "zn"
+	, "zh"
+];
+
+var gwz_UnicodeVowels_2 = 
+[
+	"ා"
+	, "ෑ"
+	, "ී"
+	, "ූ"
+	, "ෘ"
+	, "ේ"
+	, "ෛ"
+	, "ෝ"
+	, "ෞ"
+	, "්‍ර"
+	, "්‍රැ"
+	, "්‍රි"
+	, "්‍රෙ"
+	, "්‍රො"
+	, "්‍ය"
+	, "්‍යැ"
+	, "්‍යි"
+	, "්‍යු"
+	, "්‍යෙ"
+	, "්‍යො"
+	, "ං"
+	, "ඃ"
+];
+
+var VOWELS_3 = 13;
+var gz_Vowels_3 = 
+[
+	"raa"
+	, "rAA"
+	, "ree"
+	, "rea"
+	, "rai"
+	, "roa"
+	, "rou"
+	, "yaa"
+	, "yAA"
+	, "yee"
+	, "yoo"
+	, "yea"
+	, "yoa"
+];
+
+var gwz_UnicodeVowels_3 = 
+[
+	"්‍රා"
+	, "්‍රෑ"
+	, "්‍රී"
+	, "්‍රේ"
+	, "්‍රෛ"
+	, "්‍රෝ"
+	, "්‍රෞ"
+	, "්‍යා"
+	, "්‍යෑ"
+	, "්‍යී"
+	, "්‍යූ"
+	, "්‍යේ"
+	, "්‍යෝ"
+];
+
+var VOWELS_4 = 1;
+var gz_Vowels_4 = 
+[
+	"roo"
+];
+
+var gwz_UnicodeVowels_4 = 
+[
+	"ෲ"
+];
+
+var CONSONANT_1 = 27;
+var gz_Cons_1 = 
+[
+	"k"
+	, "K"
+	, "g"
+	, "G"
+	, "j"
+	, "J"
+	, "t"
+	, "T"
+	, "d"
+	, "D"
+	, "N"
+	, "n"
+	, "p"
+	, "P"
+	, "b"
+	, "B"
+	, "m"
+	, "y"
+	, "r"
+	, "l"
+	, "v"
+	, "w"
+	, "S"
+	, "s"
+	, "h"
+	, "L"
+	, "f"
+];
+
+var gwz_UnicodeCons_1 = 
+[
+	"ක"
+	, "ඛ"
+	, "ග"
+	, "ඝ"
+	, "ජ"
+	, "ඣ"
+	, "ට"
+	, "ඨ"
+	, "ඩ"
+	, "ඪ"
+	, "ණ"
+	, "න"
+	, "ප"
+	, "ඵ"
+	, "බ"
+	, "භ"
+	, "ම"
+	, "ය"
+	, "ර"
+	, "ල"
+	, "ව"
+	, "ව"
+	, "ෂ"
+	, "ස"
+	, "හ"
+	, "ළ"
+	, "ෆ"
+];
+
+var CONSONANT_2 = 7;
+var gz_Cons_2 = 
+[
+	"ch"
+	, "Ch"
+	, "th"
+	, "Th"
+	, "dh"
+	, "Dh"
+	, "sh"
+];
+
+var gwz_UnicodeCons_2 = 
+[
+	"ච"
+	, "ඡ"
+	, "ත"
+	, "ථ"
+	, "ද"
+	, "ධ"
+	, "ශ"
+];
+
+var CONSONANT_3 = 6;
+var gz_Cons_3 = 
+[
+	"xnk"
+	, "xng"
+	, "xnj"
+	, "xgn"	// exception
+	, "xnd"
+	, "xmb"
+];
+
+var gwz_UnicodeCons_3 = 
+[
+	"ඞ"
+	, "ඟ"
+	, "ඥ"
+	, "ඥ"
+	, "ඬ"
+	, "ඹ"
+];
+
+var CONSONANT_4 = 2;
+var gz_Cons_4 = 
+[
+	"xnch"
+	, "xndh"
+];
+
+var gwz_UnicodeCons_4 = 
+[
+	"ඤ"
+	, "ඳ"
+];
+
+function ToSinhalaConsonant(english) 
+{
+	var iConsLen = english.length;
+
+	var pzConsonants = null;
+	var pwzUnicode = null;
+	var iConsonants = 0;
+
+	switch(iConsLen)
+	{
+	case 1: 
+		pzConsonants = gz_Cons_1; 
+		pwzUnicode = gwz_UnicodeCons_1; 
+		iConsonants = CONSONANT_1;
+		break;
+	case 2: 
+		pzConsonants = gz_Cons_2; 
+		pwzUnicode = gwz_UnicodeCons_2; 
+		iConsonants = CONSONANT_2;
+		break;
+	case 3: 
+		pzConsonants = gz_Cons_3; 
+		pwzUnicode = gwz_UnicodeCons_3; 
+		iConsonants = CONSONANT_3;
+		break;
+	case 4: 
+		pzConsonants = gz_Cons_4; 
+		pwzUnicode = gwz_UnicodeCons_4; 
+		iConsonants = CONSONANT_4;
+		break;
+
+	default: return null;
+	}
+
+	for (var i = 0; i < iConsonants; ++i)
+	{
+		if (english === pzConsonants[i])
+			return pwzUnicode[i];
+	}
+
+	return null;
+}
+
+//**************************************************************************************************
+function ToSinhalaVowel(english)
+{
+	var iVowelLen = english.length;
+
+	var pzVowels = null;
+	var pwzUnicode = null;
+	var iVowels = 0;
+
+	switch(iVowelLen)
+	{
+	case 1: 
+		pzVowels = gz_Vowels_1; 
+		pwzUnicode = gwz_UnicodeVowels_1; 
+		iVowels = VOWELS_1;
+		break;
+	case 2: 
+		pzVowels = gz_Vowels_2; 
+		pwzUnicode = gwz_UnicodeVowels_2; 
+		iVowels = VOWELS_2;
+		break;
+	case 3: 
+		pzVowels = gz_Vowels_3; 
+		pwzUnicode = gwz_UnicodeVowels_3; 
+		iVowels = VOWELS_3;
+		break;
+	case 4: 
+		pzVowels = gz_Vowels_4; 
+		pwzUnicode = gwz_UnicodeVowels_4; 
+		iVowels = VOWELS_4;
+		break;
+
+	default: return null;
+	}
+
+	for (var i = 0; i < iVowels; ++i)
+	{
+		if (english === pzVowels[i])
+			return pwzUnicode[i];
+	}
+
+	return null;
+}
+
+//**************************************************************************************************
+function convert()
+{
+	var english = document.getElementById("english").value;
+	var iLen = english.length;
+	var wzSinhala = "";
+	var i = 0;
+	var iRemainder = iLen;
+	//alert(english);
+	
+	while (iRemainder > 0)
+	{
+		//alert("i=" + i);
+		//
+		// skip escape sequences
+		//
+		if (english.charAt(i) == '$')
+		{
+			++i;
+			--iRemainder;
+
+			while (english.charAt(i) != '$' && iRemainder > 0)
+			{
+				//alert("i=" + i);
+
+				wzSinhala += english.charAt(i);
+				++i;
+				--iRemainder;
+			}
+
+			if (iRemainder == 0)
+				break;
+			else
+			{
+				++i;
+				--iRemainder;
+			}
+		}
+
+		//
+		// Find a consonant
+		//
+		var wzCons = "";
+		var iConsLen = 0;
+		for (iConsLen = Math.min(iRemainder, 4); iConsLen > 0; --iConsLen)
+		{
+			var zCons = english.substring(i, i + iConsLen);
+			//alert("zCons " + iConsLen + "," + zCons + "," + i);
+			wzCons = ToSinhalaConsonant(zCons);
+			if (wzCons != null)
+			{
+				//alert("found :" + zCons + "," + wzCons);
+				break;
+			}
+		}
+
+		i += iConsLen;
+		iRemainder -= iConsLen;
+		//alert("After cons :" + i + "," + iRemainder + "," + iConsLen);
+		//
+		// Find a Vowel
+		//
+
+		var wzVowel = "";
+		var iVowelLen = 0;
+
+		for (iVowelLen = Math.min(iRemainder, 4); iVowelLen > 0; --iVowelLen)
+		{
+			var zVowel = english.substring(i, i + iVowelLen);
+			//alert("vowel " + iVowelLen + "," + zVowel);
+			wzVowel = ToSinhalaVowel(zVowel);
+			if (wzVowel != null)
+			{
+				//alert("found :" + zVowel + "," + wzVowel);
+				break;
+			}
+		}
+
+		i += iVowelLen;
+		iRemainder -= iVowelLen;
+		//alert("After vowel :" + i + "," + iRemainder + "," + iVowelLen);
+
+		if (iConsLen == 0 && iVowelLen == 0)
+		{
+			wzSinhala += english.charAt(i);
+			++i;
+			--iRemainder;
+		}
+		else if (iConsLen == 0 && iVowelLen > 0)
+		{
+			//
+			// Find the Standalone vowel
+			//
+			for (var n = 0; n < STANDALONE_VOWELS; ++n)
+			{
+				if (zVowel === gz_STDVowels[n])
+				{
+					wzSinhala += gwz_UnicodeSTDVowels[n];
+					break;
+				}
+			}
+		}
+		else if (iConsLen > 0 && iVowelLen == 0)
+		{
+			wzSinhala += wzCons;
+			wzSinhala += HAL_KIREEMA;
+		}
+		else
+		{
+			wzSinhala += wzCons;
+			wzSinhala += wzVowel;
+		}
+	}
+
+	document.getElementById("sinhala").value = wzSinhala;
+}
+
+</script>
+</head>
+<body>
+<textarea id="sinhala" rows="4" cols="50"></textarea>
+<textarea id="english" onkeyup="convert()" rows="4" cols="50">e</textarea>
+</body>
+</html>
