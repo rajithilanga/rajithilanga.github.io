@@ -1,8 +1,8 @@
+<!DOCTYPE HTML>
 <html>
 <head>
-   <title>Sinhala Transliterator</title>
-    <meta charset="utf-8" />
-	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Untitled Document</title>
 <script>	
 var HAL_KIREEMA = "්";
 var STANDALONE_VOWELS = 18;
@@ -380,7 +380,7 @@ function ToSinhalaVowel(english)
 //**************************************************************************************************
 function convert()
 {
-	var english = document.getElementById("english").value;
+	var english = document.getElementById("englishText").value;
 	var iLen = english.length;
 	var wzSinhala = "";
 	var i = 0;
@@ -491,33 +491,66 @@ function convert()
 		}
 	}
 
-	document.getElementById("sinhala").value = wzSinhala;
+	document.getElementById("sinhalaText").value = wzSinhala;
+}
+
+function copy()
+{
+	document.getElementById("sinhalaText").select();
+	document.execCommand('copy');
+}
+
+function help()
+{
+	alert("ka(ක)  kaa(කා) kA(කැ) kAA(කෑ) ki(කි) kee(කී) ku(කු) koo(කූ)  kru(කෘ) kroo(කෲ) ke(කෙ) kea(කේ) kai(කෛ) ko(කො) koa(කෝ)  kou(කෞ)  Ka(ඛ) xncha(ඤ) xndha(ඳ) xmba(ඹ) xgna(ඥ) zn(අං) zh(අඃ)");
 }
 
 </script>
 <style>
-	#sinhala,
-	#english {
-		position: fixed;
-		left: 0;
-		right: 0;
-		height: 50%;
-		width: 100%
-	}
+html, body {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+	overflow:hidden;
+}
 
-	#sinhala {
-		top: 0;
-		background-color: #F5F5F5;
-	}
+#container{
+	height: 100%;
+	background: #ccc;
+}
+#sinhala{
+	height:40%;
+	background: #fff;
+}
+#english{
+	height:50%;
+	background: #fff;
+}
+#tools{
+	height:10%;
+	background: #fff;
+}
 
-	#english {
-		bottom: 0;
-	}
+textarea{
+	border: 1px solid;
+	width:100%;
+	height: 100%;
+}
+
+input[type="button"]{
+	height:100%;
+	min-width:50%;
+	background: #ddd;
+	border:1px solid #ccc;
+}
 </style>
-
 </head>
+
 <body>
-<textarea id="sinhala" readonly></textarea>
-<textarea id="english" autofocus onkeyup="convert()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+<div id="container">
+<div id="sinhala"><textarea id="sinhalaText" readonly></textarea></div>
+<div id="english"><textarea id="englishText" autofocus onkeyup="convert()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea></div>
+<div id="tools"><input type="button" onclick="copy()"  name="Copy" value="Copy" /><input type="button" onclick="help()"  name="Help" value="Help" /></div>
+</div>
 </body>
 </html>
