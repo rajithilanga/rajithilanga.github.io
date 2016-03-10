@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 <head>
    <title>Sinhala Transliterator</title>
     <meta charset="utf-8" />
@@ -495,9 +495,28 @@ function convert()
 }
 
 </script>
+<style>
+	#sinhala,
+	#english {
+		position: fixed;
+		left: 0;
+		right: 0;
+		height: 50%;
+		width: 100%
+	}
+
+	#sinhala {
+		top: 0;
+	}
+
+	#english {
+		bottom: 0;
+	}
+</style>
+
 </head>
 <body>
-<textarea id="sinhala" rows="4" cols="50"></textarea>
-<textarea id="english" onkeyup="convert()" rows="4" cols="50">e</textarea>
+<textarea id="sinhala"></textarea>
+<textarea id="english" onkeyup="convert()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
 </body>
 </html>
