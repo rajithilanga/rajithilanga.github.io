@@ -507,6 +507,7 @@ function convert()
 
 	#sinhala {
 		top: 0;
+		background-color: #F5F5F5;
 	}
 
 	#english {
@@ -516,7 +517,7 @@ function convert()
 
 </head>
 <body>
-<textarea id="sinhala"></textarea>
-<textarea id="english" onkeyup="convert()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+<textarea id="sinhala" readonly></textarea>
+<textarea id="english" autofocus onkeyup="convert()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
 </body>
 </html>
